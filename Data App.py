@@ -21,7 +21,7 @@ def show_generated_code(code):
     code_text.pack(pady=10)
 
     tk.Button(root, text="Copy to Clipboard", command=lambda: copy_to_clipboard(code), font=("Verdana", 12, "bold")).pack(pady=10)
-    tk.Button(root, text="Back to Menu", command=main_menu, font=("Helvetica", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Back to Menu", command=main_menu, font=("Verdana", 12, "bold")).pack(pady=10)
 
 # Helper function to create labels
 def create_label(parent, text, font=("Verdana", 14, "bold")):
@@ -40,7 +40,7 @@ def add_field(entries_list, parent_frame, with_checkbox=False):
     
     if with_checkbox:
         var = tk.IntVar()
-        tk.Checkbutton(entry_frame, text="Optional", variable=var, bg="white").pack(side=tk.LEFT)
+        tk.Checkbutton(entry_frame, text="Args", variable=var, bg="white").pack(side=tk.LEFT)
         return var
 
 # Input page for creating a class
@@ -63,8 +63,8 @@ def class_input_page():
         add_field(fields_entries, fields_frame)
     
     tk.Button(root, text="Add Field", command=lambda: add_field(fields_entries, fields_frame), font=("Verdana", 12, "bold")).pack(pady=5)
-    tk.Button(root, text="Generate Class", command=lambda: generate_class(class_name_entry, fields_entries), font=("Helvetica", 12, "bold")).pack(pady=10)
-    tk.Button(root, text="Back to Menu", command=main_menu, font=("Helvetica", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Generate Class", command=lambda: generate_class(class_name_entry, fields_entries), font=("Verdana", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Back to Menu", command=main_menu, font=("Verdana", 12, "bold")).pack(pady=10)
 
 def generate_class(class_name_entry, fields_entries):
     class_name = class_name_entry.get().strip().lower()
@@ -79,7 +79,7 @@ def generate_class(class_name_entry, fields_entries):
     if not fields:
         class_code += "    pass\n"
     
-    # Add example instantiation and formatted print statements
+    # Add example and formatted print statements
     class_code += f"\n{class_name}_instance = {class_name}(" + ", ".join(["'<add text>'"] * len(fields)) + ")\n"
     for field in fields:
         class_code += f"print(f\"{field.capitalize()}: {{{class_name}_instance.{field}}}\")\n"
@@ -114,7 +114,7 @@ def function_input_page():
     tk.Checkbutton(root, text="Print Greeting", variable=print_params_var, font=("Verdana", 12), bg="white").pack(pady=5)
     
     tk.Button(root, text="Generate Function", command=lambda: generate_function(func_name_entry, params_entries, params_checkboxes, print_params_var), font=("Verdana", 12, "bold")).pack(pady=10)
-    tk.Button(root, text="Back to Menu", command=main_menu, font=("Helvetica", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Back to Menu", command=main_menu, font=("Verdana", 12, "bold")).pack(pady=10)
 
 def generate_function(func_name_entry, params_entries, params_checkboxes, print_params_var):
     func_name = func_name_entry.get().strip().lower()
@@ -155,8 +155,8 @@ def tuple_input_page():
         add_field(tuple_entries, tuple_frame)
     
     tk.Button(root, text="Add Value", command=lambda: add_field(tuple_entries, tuple_frame), font=("Verdana", 12, "bold")).pack(pady=5)
-    tk.Button(root, text="Generate Tuple", command=lambda: generate_tuple(tuple_entries), font=("Helvetica", 12, "bold")).pack(pady=10)
-    tk.Button(root, text="Back to Menu", command=main_menu, font=("Helvetica", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Generate Tuple", command=lambda: generate_tuple(tuple_entries), font=("Verdana", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Back to Menu", command=main_menu, font=("Verdana", 12, "bold")).pack(pady=10)
 
 def generate_tuple(tuple_entries):
     values = [entry.get().strip().lower() for entry in tuple_entries if entry.get().strip()]
@@ -183,8 +183,8 @@ def list_input_page():
         add_field(list_entries, list_frame)
     
     tk.Button(root, text="Add Item", command=lambda: add_field(list_entries, list_frame), font=("Verdana", 12, "bold")).pack(pady=5)
-    tk.Button(root, text="Generate List", command=lambda: generate_list(list_name_entry, list_entries), font=("Helvetica", 12, "bold")).pack(pady=10)
-    tk.Button(root, text="Back to Menu", command=main_menu, font=("Helvetica", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Generate List", command=lambda: generate_list(list_name_entry, list_entries), font=("Verdana", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Back to Menu", command=main_menu, font=("Verdana", 12, "bold")).pack(pady=10)
 
 def generate_list(list_name_entry, list_entries):
     list_name = list_name_entry.get().strip()
@@ -213,7 +213,7 @@ def dict_input_page():
     for _ in range(3):
         add_field(dict_keys_entries, keys_frame)
     
-    tk.Button(root, text="Add Key", command=lambda: add_field(dict_keys_entries, keys_frame), font=("Helvetica", 12, "bold")).pack(pady=5)
+    tk.Button(root, text="Add Key", command=lambda: add_field(dict_keys_entries, keys_frame), font=("Verdana", 12, "bold")).pack(pady=5)
     
     create_label(root, "Values (one per box):", font=("Verdana", 12))
     
@@ -223,10 +223,10 @@ def dict_input_page():
     for _ in range(3):
         add_field(dict_values_entries, values_frame)
     
-    tk.Button(root, text="Add Value", command=lambda: add_field(dict_values_entries, values_frame), font=("Helvetica", 12, "bold")).pack(pady=5)
+    tk.Button(root, text="Add Value", command=lambda: add_field(dict_values_entries, values_frame), font=("Verdana", 12, "bold")).pack(pady=5)
     
-    tk.Button(root, text="Generate Dictionary", command=lambda: generate_dict(dict_name_entry, dict_keys_entries, dict_values_entries), font=("Helvetica", 12, "bold")).pack(pady=10)
-    tk.Button(root, text="Back to Menu", command=main_menu, font=("Helvetica", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Generate Dictionary", command=lambda: generate_dict(dict_name_entry, dict_keys_entries, dict_values_entries), font=("Verdana", 12, "bold")).pack(pady=10)
+    tk.Button(root, text="Back to Menu", command=main_menu, font=("Verdana", 12, "bold")).pack(pady=10)
 
 def generate_dict(dict_name_entry, dict_keys_entries, dict_values_entries):
     dict_name = dict_name_entry.get().strip()
@@ -259,7 +259,7 @@ def set_input_page():
     for _ in range(4):
         add_field(set_entries, set_frame)
     
-    tk.Button(root, text="Add Item", command=lambda: add_field(set_entries, set_frame), font=("Helvetica", 12, "bold")).pack(pady=5)
+    tk.Button(root, text="Add Item", command=lambda: add_field(set_entries, set_frame), font=("Verdana", 12, "bold")).pack(pady=5)
     tk.Button(root, text="Generate Set", command=lambda: generate_set(set_name_entry, set_entries), font=("Verdana", 12, "bold")).pack(pady=10)
     tk.Button(root, text="Back to Menu", command=main_menu, font=("Verdana", 12, "bold")).pack(pady=10)
 
@@ -284,9 +284,9 @@ def main_menu():
     ]
     
     for text, command in buttons:
-        tk.Button(root, text=text, command=command, font=("Helvetica", 12, "bold"), width=20).pack(pady=10)
+        tk.Button(root, text=text, command=command, font=("Verdana", 12, "bold"), width=20).pack(pady=10)
     
-    tk.Button(root, text="Exit", command=root.quit, font=("Helvetica", 12, "bold"), width=20).pack(pady=10)
+    tk.Button(root, text="Exit", command=root.quit, font=("Verdana", 12, "bold"), width=20).pack(pady=10)
 
 # Initialize Tkinter window
 root = tk.Tk()
